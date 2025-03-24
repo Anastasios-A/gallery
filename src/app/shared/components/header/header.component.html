@@ -1,0 +1,53 @@
+<mat-toolbar class="header-toolbar">
+  <div class="toolbar-content">
+    <span class="logo">XMPhotos</span>
+
+    <div class="nav-buttons-wrapper">
+      <button
+        mat-button
+        class="routerButtons"
+        routerLink="/"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        {{ "general.photos" | translate }}
+      </button>
+      <button
+        class="routerButtons"
+        mat-button
+        routerLink="/favorites"
+        routerLinkActive="active-link"
+      >
+        {{ "general.favorites" | translate }}
+      </button>
+    </div>
+    <!-- <div class="theme-toggle">
+      <button   [ngClass]="{ active: currentLanguage() === 'en' }" class="langButton" mat-icon-button (click)="changeLanguage('en')">GB</button>
+      <button   [ngClass]="{ active: currentLanguage() === 'gr' }" class="langButton" mat-icon-button (click)="changeLanguage('gr')">GR</button>
+    </div> -->
+
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="i18n"
+        fontIcon="language"
+      ></mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="changeLanguage('gr')">
+        <div class="menu-item-content">
+          <mat-icon *ngIf="currentLanguage() === 'gr'">check</mat-icon>
+          <span>Ελληνικά</span>
+        </div>
+      </button>
+    
+      <button mat-menu-item (click)="changeLanguage('en')">
+        <div class="menu-item-content">
+          <mat-icon *ngIf="currentLanguage() === 'en'">check</mat-icon>
+          <span>English</span>
+        </div>
+      </button>
+    </mat-menu>
+    
+  </div>
+</mat-toolbar>

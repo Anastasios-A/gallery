@@ -1,0 +1,34 @@
+.photo-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 32px;
+  }
+  
+  .photo-preview {
+    // max-width: 100%;
+    width: 40vw;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .info {
+    text-align: center;
+    max-width: 600px;
+  
+    h2 {
+      margin-bottom: 8px;
+    }
+  
+    p {
+      margin: 4px 0;
+      color: #555;
+    }
+  
+    button {
+      margin-top: 16px;
+    }
+  }
+  

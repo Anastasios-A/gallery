@@ -1,0 +1,38 @@
+@use "../../../../styles" as styles;
+
+.header-toolbar {
+  background-color: styles.$platinum-gray;
+}
+
+.toolbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-buttons-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  width: 40%;
+}
+
+.active-link {
+  font-weight: bold;
+  border-bottom: 2px solid styles.$simply-red;
+}
+
+.routerButtons {
+  border-radius: 100px;
+}
+
+.menu-item-content {
+  display: flex;
+  align-items: baseline;
+  justify-content: end;
+
+  mat-icon {
+    font-size: 1rem;
+    color: styles.$perfect-green;
+  }
+}

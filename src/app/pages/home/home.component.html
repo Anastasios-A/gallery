@@ -1,0 +1,22 @@
+<ng-container *ngIf="photos$ | async as photos" class="photos-container">
+  <mat-grid-list cols="3" gutterSize="16px" rowHeight="1:1">
+    <mat-grid-tile
+      *ngFor="let photo of photos; let last = last; trackBy: trackByPhotoId"
+      #photoCard
+    >
+      <app-photo-card
+        [photo]="photo"
+        [isFavorite]="favoritesService.isFavorite(photo.id)"
+        (photoClick)="toggleFavorite($event)"
+      />
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <!-- Spinner shown while loading more -->
+  <div class="spinner-container" *ngIf="isLoading$ | async">
+    <mat-progress-spinner
+      diameter="60"
+      mode="indeterminate"
+    ></mat-progress-spinner>
+  </div>
+</ng-container>

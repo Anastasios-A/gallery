@@ -1,0 +1,24 @@
+{
+    "auth":{    
+        "login":"Login",
+        "register":"Register",
+        "logout":"logout"
+    },
+    "general": {
+      "photos": "Photos",
+      "favorites": "Favorites",
+      "favoritePhoto": "Favorite Photo",
+      "toggle_theme": "Toggle Theme",
+        "gr": "Greek",
+        "en": "English"
+
+    },
+    "favorites": {
+      "photo" : "Photo",
+      "addedOn": "Added on",
+      "noFavorites": "No favorites yet. Add some!",
+      "remove": "Remove from favorite",
+      "photographer": "Photographer"
+    }
+  }
+  

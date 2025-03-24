@@ -1,0 +1,23 @@
+<ng-container *ngIf="favorites$ | async as favorites; else loading">
+  <mat-grid-list cols="3" gutterSize="16px" rowHeight="1:1">
+    <mat-grid-tile *ngFor="let photo of favorites; trackBy: trackByPhotoId">
+      <a [routerLink]="['/photos', photo.id]">
+        <app-photo-card [onFavoritePage]="false" [photo]="photo" />
+      </a>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <div class="empty" *ngIf="favorites.length === 0">
+    {{ "favorites.noFavorites" | translate }}
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <div class="spinner-container">
+    <mat-progress-spinner
+      diameter="40"
+      mode="indeterminate"
+      color="primary"
+    ></mat-progress-spinner>
+  </div>
+</ng-template>

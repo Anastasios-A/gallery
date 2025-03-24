@@ -1,0 +1,13 @@
+<mat-card class="photo-card" (click)="onCardClick()" >
+
+  <button
+  *ngIf="onFavoritePage"
+   mat-icon-button 
+   class="favorite-icon" >
+    <mat-icon >
+      {{ isFavorite ? 'favorite' : 'favorite_border' }}
+    </mat-icon>
+  </button>
+
+  <img mat-card-image [src]="photo.url" [alt]="photo.id" />
+</mat-card>

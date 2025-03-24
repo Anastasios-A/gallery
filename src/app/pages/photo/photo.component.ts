@@ -5,33 +5,32 @@ import { FavoritesService } from '../../core/services/favorites.service';
 import { IPhoto } from '../../core/models/photo.model';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-photo',
   standalone: true,
-  imports: [CommonModule, MatButtonModule,TranslateModule],
+  imports: [CommonModule, MatButtonModule, TranslateModule],
   templateUrl: './photo.component.html',
   styleUrls: ['./photo.component.scss'],
 })
 export class PhotoComponent implements OnInit {
   favoritesService = inject(FavoritesService);
   photo?: IPhoto;
-  author: string = 'Author';
+  author$?: Observable<string>;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     const photoId = this.route.snapshot.paramMap.get('id');
+
     if (!photoId) {
       this.router.navigate(['/favorites']);
     } else {
       this.photo = this.favoritesService.getPhotoById(photoId);
 
-    this.favoritesService.fetchPhotoAuthor(photoId).subscribe({
-      next: (data) => (this.author = data.author),
-      error: () => (this.author = 'Unknown'),
-    });
-  }
+      this.author$ = this.favoritesService.fetchPhotoAuthor(photoId);
+    }
   }
 
   goBack(): void {

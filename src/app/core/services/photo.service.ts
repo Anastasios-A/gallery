@@ -28,14 +28,14 @@ export class PhotosService {
 
     this.loadingSubject.next(true);
 
-    const newPhotos: IPhoto[] = Array.from({ length: count }, () => {
+    const newPhotos: IPhoto[] = [];
+    for (let i = 0; i < count; i++) {
       const id = this.preventCahe++;
-      return {
+      newPhotos.push({
         id: id.toString(),
         url: `https://picsum.photos/400/350?random=${id}`,
-      };
-    });
-
+      });
+    }
     of(newPhotos)
       .pipe(
         delay(this.getRandomDelay()),
@@ -44,7 +44,7 @@ export class PhotosService {
           this.photosSubject.next([...current, ...photos]);
           this.loadingSubject.next(false);
         })
-      )
-      .subscribe();
+      ).subscribe();
+      
   }
 }

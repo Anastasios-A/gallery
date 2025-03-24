@@ -24,7 +24,7 @@ import {MatIconModule} from '@angular/material/icon';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class NavBarComponent {
+export class HeaderComponent {
   translateService = inject(TranslationService);
 
   changeLanguage(lang: string): void {

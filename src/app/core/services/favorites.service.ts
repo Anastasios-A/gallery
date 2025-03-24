@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { IPhoto } from '../models/photo.model';
 import { HttpClient } from '@angular/common/http';
 
@@ -15,11 +15,12 @@ export class FavoritesService {
   private favoritesSubject = new BehaviorSubject<IPhoto[]>(
     this.loadFromStorage(LocalStorageKey.FAVORITES)
   );
+
   favorites$ = this.favoritesSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  private loadFromStorage(storageEnum : LocalStorageKey): IPhoto[] {
+  private loadFromStorage(storageEnum: LocalStorageKey): IPhoto[] {
     const stored = localStorage.getItem(storageEnum);
     const parsed: IPhoto[] = stored ? JSON.parse(stored) : [];
     return parsed.map((p) => ({
@@ -36,16 +37,17 @@ export class FavoritesService {
   }
 
   selectedPhoto(selectedPhoto: IPhoto): void {
-    this.saveToStorage(selectedPhoto,LocalStorageKey.SELECTED_PHOTO);
+    this.saveToStorage(selectedPhoto, LocalStorageKey.SELECTED_PHOTO);
   }
 
-  getSelectedPhoto(): IPhoto | null {
-    const stored = localStorage.getItem(LocalStorageKey.SELECTED_PHOTO);
-    return stored ? JSON.parse(stored) : null;
-  }
+  // getSelectedPhoto(): IPhoto | null {
+  //   const stored = localStorage.getItem(LocalStorageKey.SELECTED_PHOTO);
+  //   return stored ? JSON.parse(stored) : null;
+  // }
+
   getPhotoById(id: string): IPhoto | undefined {
     return this.getFavorites().find((p) => p.id === id);
-  };
+  }
 
   getFavorites(): IPhoto[] {
     return this.favoritesSubject.value;
@@ -74,9 +76,9 @@ export class FavoritesService {
     return this.getFavorites().some((p) => p.id === id);
   }
 
-  fetchPhotoAuthor(id: string) {
-    return this.http.get<{ author: string }>(
-      `https://picsum.photos/id/${id}/info`
-    );
+  fetchPhotoAuthor(id: string): Observable<string> {
+    return this.http
+      .get<{ author: string }>(`https://picsum.photos/id/${id}/info`)
+      .pipe(map((data) => data.author));
   }
 }

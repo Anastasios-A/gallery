@@ -4,7 +4,7 @@
   <div class="info">
     <h2>{{ "favorites.photo" | translate }} #{{ photo.id }}</h2>
     <p>
-      <strong>{{ "favorites.photographer" | translate }}:</strong> {{ author }}
+      <strong>{{ "favorites.photographer" | translate }}:</strong> {{ this.author$ | async  }}
     </p>
     <p>
       <strong>{{ "favorites.addedOn" | translate }}:</strong>
@@ -20,3 +20,5 @@
     </button>
   </div>
 </div>
+
+

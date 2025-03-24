@@ -14,7 +14,7 @@
 
     },
     "favorites": {
-      "photo" : "Photo",
+      "photo" : "Photo Id",
       "addedOn": "Added on",
       "noFavorites": "No favorites yet. Add some!",
       "remove": "Remove from favorite",

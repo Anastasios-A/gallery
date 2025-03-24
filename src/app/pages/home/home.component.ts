@@ -30,6 +30,7 @@ import { FavoritesService } from '../../core/services/favorites.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+
   photosService = inject(PhotosService);
   photos$ = this.photosService.photos$;
   isLoading$ = this.photosService.loading$;
@@ -37,9 +38,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   favoritesService = inject(FavoritesService);
 
   @ViewChildren('photoCard', { read: ElementRef })
+
   photoCards?: QueryList<ElementRef>;
 
-  private observer!: IntersectionObserver;
+  private IObserver!: IntersectionObserver;
 
   ngOnInit(): void {
     this.photosService.loadMorePhotos(); // Initial load
@@ -55,17 +57,17 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private setupObserver(element: HTMLElement): void {
-    if (this.observer) {
-      this.observer.disconnect();
+    if (this.IObserver) {
+      this.IObserver.disconnect();
     }
 
-    this.observer = new IntersectionObserver(([entry]) => {
+    this.IObserver = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         this.photosService.loadMorePhotos();
       }
     });
 
-    this.observer.observe(element);
+    this.IObserver.observe(element);
   }
 
   toggleFavorite(photo: IPhoto): void {
@@ -79,7 +81,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.observer?.disconnect();
+    this.IObserver?.disconnect();
   }
 }
 

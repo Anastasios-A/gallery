@@ -30,7 +30,6 @@ import { FavoritesService } from '../../core/services/favorites.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
-
   photosService = inject(PhotosService);
   photos$ = this.photosService.photos$;
   isLoading$ = this.photosService.loading$;
@@ -38,10 +37,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   favoritesService = inject(FavoritesService);
 
   @ViewChildren('photoCard', { read: ElementRef })
-
   photoCards?: QueryList<ElementRef>;
 
-  private IObserver!: IntersectionObserver;
+  private IObserver?: IntersectionObserver;
 
   ngOnInit(): void {
     this.photosService.loadMorePhotos(); // Initial load
@@ -76,7 +74,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       : this.favoritesService.add(photo);
   }
 
-  trackByPhotoId(index: number, photo: IPhoto): string {
+  trackByPhotoId(_: number, photo: IPhoto): string {
     return photo.id;
   }
 
@@ -84,37 +82,3 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.IObserver?.disconnect();
   }
 }
-
-// import { Component, HostListener, inject, OnInit } from '@angular/core';
-// import { NgFor, AsyncPipe, NgIf } from '@angular/common';
-// import { Photo } from '../../core/models/photo.model';
-// import { PhotosService } from '../../core/services/photo.service';
-
-// @Component({
-//   selector: 'app-home',
-//   standalone: true,
-//   imports: [NgFor, AsyncPipe, NgIf],
-//   templateUrl: './home.component.html',
-//   styleUrls: ['./home.component.scss'],
-// })
-// export class HomeComponent implements OnInit {
-//   photosService = inject(PhotosService);
-//   photos$ = this.photosService.photos$;
-
-//   ngOnInit(): void {
-//     this.photosService.loadMorePhotos(); // initial load
-//   }
-
-//   @HostListener('window:scroll', [])
-//   onWindowScroll(): void {
-//     const scrollTop = window.scrollY;
-//     const docHeight = document.documentElement.scrollHeight;
-//     const winHeight = window.innerHeight;
-
-//     const bottomOffset = 300;
-
-//     if (scrollTop + winHeight + bottomOffset >= docHeight) {
-//       this.photosService.loadMorePhotos();
-//     }
-//   }
-// }

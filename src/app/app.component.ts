@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
-import {  HeaderComponent } from './shared/components/header/header.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { BackToTopComponent } from './shared/components/back-to-top/back-to-top.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [RouterOutlet, HeaderComponent ,BackToTopComponent],
 })
 export class AppComponent {
-  title = 'gallery';
+  title = 'gallery-template';
 }

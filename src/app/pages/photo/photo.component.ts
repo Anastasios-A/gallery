@@ -29,7 +29,7 @@ export class PhotoComponent implements OnInit {
     } else {
       this.photo = this.favoritesService.getPhotoById(photoId);
 
-      this.author$ = this.favoritesService.fetchPhotoAuthor(photoId);
+      this.author$ = this.favoritesService.fetchPhotoInfo(photoId);
     }
   }
 

@@ -17,22 +17,26 @@
         mat-button
         routerLink="/favorites"
         routerLinkActive="active-link"
+        [matBadgeHidden]="((favorites$ | async) || []).length < 1"
+        matBadge="{{ (favorites$ | async)?.length }}"
+        matBadgeColor="accent"
       >
         {{ "general.favorites" | translate }}
       </button>
     </div>
-    <!-- <div class="theme-toggle">
-      <button   [ngClass]="{ active: currentLanguage() === 'en' }" class="langButton" mat-icon-button (click)="changeLanguage('en')">GB</button>
-      <button   [ngClass]="{ active: currentLanguage() === 'gr' }" class="langButton" mat-icon-button (click)="changeLanguage('gr')">GR</button>
-    </div> -->
 
-    <button mat-button [matMenuTriggerFor]="menu">
+    <button
+      [ngStyle]="{ display: 'flex', justifyContent: 'end' }"
+      mat-button
+      [matMenuTriggerFor]="menu"
+    >
       <mat-icon
         aria-hidden="false"
         aria-label="i18n"
         fontIcon="language"
       ></mat-icon>
     </button>
+
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="changeLanguage('gr')">
         <div class="menu-item-content">
@@ -40,7 +44,7 @@
           <span>Ελληνικά</span>
         </div>
       </button>
-    
+
       <button mat-menu-item (click)="changeLanguage('en')">
         <div class="menu-item-content">
           <mat-icon *ngIf="currentLanguage() === 'en'">check</mat-icon>
@@ -48,6 +52,5 @@
         </div>
       </button>
     </mat-menu>
-    
   </div>
 </mat-toolbar>

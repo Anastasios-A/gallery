@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { AsyncPipe, CommonModule, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { RouterModule } from '@angular/router';
 import { FavoritesService } from '../../core/services/favorites.service';
@@ -11,15 +11,13 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-favorites',
   standalone: true,
   imports: [
-    CommonModule,
     AsyncPipe,
-    NgIf,
-    NgFor,
+    CommonModule,
     RouterModule,
     MatGridListModule,
     PhotoCardComponent,
     MatProgressSpinnerModule,
-  TranslateModule
+    TranslateModule,
   ],
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.scss'],
@@ -28,7 +26,7 @@ export class FavoritesComponent {
   favoritesService = inject(FavoritesService);
   favorites$ = this.favoritesService.favorites$;
 
-  trackByPhotoId(index: number, photo: { id: string }) {
+  trackByPhotoId(_: number, photo: { id: string }) {
     return photo.id;
   }
 }

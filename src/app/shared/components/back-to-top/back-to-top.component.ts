@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./back-to-top.component.scss'],
 })
 export class BackToTopComponent {
-  showButton = true; 
+  showButton = false; 
 
   @HostListener('window:scroll', [])
   onScroll(): void {
